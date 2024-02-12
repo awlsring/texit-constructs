@@ -1,15 +1,20 @@
 const { awscdk } = require('projen');
+const { GithubCredentials } = require('projen/lib/github');
+const { NpmAccess } = require('projen/lib/javascript');
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Matthew Rawlings',
-  authorAddress: 'mattcanemail@gmail.com',
-  cdkVersion: '2.1.0',
+  authorAddress: 'contact@matthewrawlings.com',
+  cdkVersion: '2.127.0',
   defaultReleaseBranch: 'main',
   name: 'texit-constructs',
+  testdir: '',
+  gitignore: ['.vscode'],
+  npmAccess: NpmAccess.PUBLIC,
   repositoryUrl: 'https://github.com/mattcanemail/texit-constructs.git',
-
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
+  githubOptions: {
+    projenCredentials: GithubCredentials.fromPersonalAccessToken(
+      'PROJEN_GITHUB_TOKEN',
+    ),
+  },
 });
 project.synth();
