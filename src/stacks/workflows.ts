@@ -1,11 +1,11 @@
-import { Stack, StackProps } from "aws-cdk-lib";
-import { ITable } from "aws-cdk-lib/aws-dynamodb";
-import { IBucket } from "aws-cdk-lib/aws-s3";
-import { IStateMachine } from "aws-cdk-lib/aws-stepfunctions";
-import { Construct } from "constructs";
-import { DeprovisionNodeWorkflow } from "../constructs/texit/workflow/deprovision-node-workflow";
-import { ProvisionNodeWorkflow } from "../constructs/texit/workflow/provision-node-workflow";
-import { WorkflowHandler } from "../constructs/texit/workflow/workflow-handler";
+import { Stack, StackProps } from 'aws-cdk-lib';
+import { ITable } from 'aws-cdk-lib/aws-dynamodb';
+import { IBucket } from 'aws-cdk-lib/aws-s3';
+import { IStateMachine } from 'aws-cdk-lib/aws-stepfunctions';
+import { Construct } from 'constructs';
+import { DeprovisionNodeWorkflow } from '../constructs/texit/workflow/deprovision-node-workflow';
+import { ProvisionNodeWorkflow } from '../constructs/texit/workflow/provision-node-workflow';
+import { WorkflowHandler } from '../constructs/texit/workflow/workflow-handler';
 
 export interface TexitWorkflowsStackProps extends StackProps {
   /**
@@ -42,7 +42,7 @@ export class TexitWorkflowsStack extends Stack {
   constructor(scope: Construct, id: string, props: TexitWorkflowsStackProps) {
     super(scope, id, props);
 
-    const handler = new WorkflowHandler(this, "workflow-handler", {
+    const handler = new WorkflowHandler(this, 'workflow-handler', {
       binaryPath: props.binaryPath,
       configBucket: props.configBucket,
       configObject: props.configObject,
@@ -53,19 +53,19 @@ export class TexitWorkflowsStack extends Stack {
 
     const provisionNode = new ProvisionNodeWorkflow(
       this,
-      "provision-node-workflow",
+      'provision-node-workflow',
       {
         handler,
-      }
+      },
     );
     this.provisionNodeWorkflow = provisionNode.stateMachine;
 
     const deprovisionNode = new DeprovisionNodeWorkflow(
       this,
-      "deprovision-node-workflow",
+      'deprovision-node-workflow',
       {
         handler,
-      }
+      },
     );
     this.deprovisionNodeWorkflow = deprovisionNode.stateMachine;
   }
