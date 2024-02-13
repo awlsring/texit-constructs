@@ -1,15 +1,15 @@
 import { CfnOutput, Stack, StackProps } from 'aws-cdk-lib';
 import { HttpApi } from 'aws-cdk-lib/aws-apigatewayv2';
-import { IFunction } from 'aws-cdk-lib/aws-lambda';
+import { Code, IFunction } from 'aws-cdk-lib/aws-lambda';
 import { IBucket } from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
 import { TexitDiscordBot } from '../constructs/discord-bot/discord-bot';
 
 export interface TexitDiscordBotStackProps extends StackProps {
   /**
-   * The path to the directory containing the Texit Discord binary.
+   * The code asset to deploy
    */
-  readonly binaryPath: string;
+  readonly binary: Code;
   /**
    * The S3 bucket containing the Texit configuration file.
    */
@@ -37,7 +37,7 @@ export class TexitDiscordBotStack extends Stack {
     super(scope, id, props);
 
     const texit = new TexitDiscordBot(this, 'api', {
-      binaryPath: props.binaryPath,
+      binary: props.binary,
       configBucket: props.configBucket,
       configObject: props.configObject,
       texitEndpoint: props.texitEndpoint,

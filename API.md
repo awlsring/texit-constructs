@@ -6319,7 +6319,7 @@ const texitApiProps: TexitApiProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#texit-constructs.TexitApiProps.property.binaryPath">binaryPath</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#texit-constructs.TexitApiProps.property.binary">binary</a></code> | <code>aws-cdk-lib.aws_lambda.Code</code> | *No description.* |
 | <code><a href="#texit-constructs.TexitApiProps.property.configBucket">configBucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
 | <code><a href="#texit-constructs.TexitApiProps.property.deployNodeWorkflow">deployNodeWorkflow</a></code> | <code>aws-cdk-lib.aws_stepfunctions.IStateMachine</code> | *No description.* |
 | <code><a href="#texit-constructs.TexitApiProps.property.executionTable">executionTable</a></code> | <code>aws-cdk-lib.aws_dynamodb.ITable</code> | *No description.* |
@@ -6330,13 +6330,13 @@ const texitApiProps: TexitApiProps = { ... }
 
 ---
 
-##### `binaryPath`<sup>Required</sup> <a name="binaryPath" id="texit-constructs.TexitApiProps.property.binaryPath"></a>
+##### `binary`<sup>Required</sup> <a name="binary" id="texit-constructs.TexitApiProps.property.binary"></a>
 
 ```typescript
-public readonly binaryPath: string;
+public readonly binary: Code;
 ```
 
-- *Type:* string
+- *Type:* aws-cdk-lib.aws_lambda.Code
 
 ---
 
@@ -6434,7 +6434,7 @@ const texitApiStackProps: TexitApiStackProps = { ... }
 | <code><a href="#texit-constructs.TexitApiStackProps.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method to use while deploying this stack. |
 | <code><a href="#texit-constructs.TexitApiStackProps.property.tags">tags</a></code> | <code>{[ key: string ]: string}</code> | Stack tags that will be applied to all the taggable resources and the stack itself. |
 | <code><a href="#texit-constructs.TexitApiStackProps.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether to enable termination protection for this stack. |
-| <code><a href="#texit-constructs.TexitApiStackProps.property.binaryPath">binaryPath</a></code> | <code>string</code> | The path to the directory containing the Texit binary. |
+| <code><a href="#texit-constructs.TexitApiStackProps.property.binary">binary</a></code> | <code>aws-cdk-lib.aws_lambda.Code</code> | The code asset to deploy. |
 | <code><a href="#texit-constructs.TexitApiStackProps.property.configBucket">configBucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | The S3 bucket containing the Texit configuration file. |
 | <code><a href="#texit-constructs.TexitApiStackProps.property.deployNodeWorkflow">deployNodeWorkflow</a></code> | <code>aws-cdk-lib.aws_stepfunctions.IStateMachine</code> | The deploy node workflow. |
 | <code><a href="#texit-constructs.TexitApiStackProps.property.executionTable">executionTable</a></code> | <code>aws-cdk-lib.aws_dynamodb.ITable</code> | The Execution DDB Table. |
@@ -6654,15 +6654,15 @@ Whether to enable termination protection for this stack.
 
 ---
 
-##### `binaryPath`<sup>Required</sup> <a name="binaryPath" id="texit-constructs.TexitApiStackProps.property.binaryPath"></a>
+##### `binary`<sup>Required</sup> <a name="binary" id="texit-constructs.TexitApiStackProps.property.binary"></a>
 
 ```typescript
-public readonly binaryPath: string;
+public readonly binary: Code;
 ```
 
-- *Type:* string
+- *Type:* aws-cdk-lib.aws_lambda.Code
 
-The path to the directory containing the Texit binary.
+The code asset to deploy.
 
 ---
 
@@ -6792,7 +6792,7 @@ const texitDiscordBotProps: TexitDiscordBotProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#texit-constructs.TexitDiscordBotProps.property.binaryPath">binaryPath</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#texit-constructs.TexitDiscordBotProps.property.binary">binary</a></code> | <code>aws-cdk-lib.aws_lambda.Code</code> | *No description.* |
 | <code><a href="#texit-constructs.TexitDiscordBotProps.property.configBucket">configBucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
 | <code><a href="#texit-constructs.TexitDiscordBotProps.property.configObject">configObject</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#texit-constructs.TexitDiscordBotProps.property.handler">handler</a></code> | <code><a href="#texit-constructs.DiscordHandlerProps">DiscordHandlerProps</a></code> | *No description.* |
@@ -6800,13 +6800,13 @@ const texitDiscordBotProps: TexitDiscordBotProps = { ... }
 
 ---
 
-##### `binaryPath`<sup>Required</sup> <a name="binaryPath" id="texit-constructs.TexitDiscordBotProps.property.binaryPath"></a>
+##### `binary`<sup>Required</sup> <a name="binary" id="texit-constructs.TexitDiscordBotProps.property.binary"></a>
 
 ```typescript
-public readonly binaryPath: string;
+public readonly binary: Code;
 ```
 
-- *Type:* string
+- *Type:* aws-cdk-lib.aws_lambda.Code
 
 ---
 
@@ -6874,7 +6874,7 @@ const texitDiscordBotStackProps: TexitDiscordBotStackProps = { ... }
 | <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method to use while deploying this stack. |
 | <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.tags">tags</a></code> | <code>{[ key: string ]: string}</code> | Stack tags that will be applied to all the taggable resources and the stack itself. |
 | <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether to enable termination protection for this stack. |
-| <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.binaryPath">binaryPath</a></code> | <code>string</code> | The path to the directory containing the Texit Discord binary. |
+| <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.binary">binary</a></code> | <code>aws-cdk-lib.aws_lambda.Code</code> | The code asset to deploy. |
 | <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.configBucket">configBucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | The S3 bucket containing the Texit configuration file. |
 | <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.configObject">configObject</a></code> | <code>string</code> | The object key of the Texit configuration file. |
 | <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.texitEndpoint">texitEndpoint</a></code> | <code>string</code> | The endpoint of the Texit API. |
@@ -7091,15 +7091,15 @@ Whether to enable termination protection for this stack.
 
 ---
 
-##### `binaryPath`<sup>Required</sup> <a name="binaryPath" id="texit-constructs.TexitDiscordBotStackProps.property.binaryPath"></a>
+##### `binary`<sup>Required</sup> <a name="binary" id="texit-constructs.TexitDiscordBotStackProps.property.binary"></a>
 
 ```typescript
-public readonly binaryPath: string;
+public readonly binary: Code;
 ```
 
-- *Type:* string
+- *Type:* aws-cdk-lib.aws_lambda.Code
 
-The path to the directory containing the Texit Discord binary.
+The code asset to deploy.
 
 ---
 
@@ -7266,7 +7266,7 @@ const texitWorkflowsStackProps: TexitWorkflowsStackProps = { ... }
 | <code><a href="#texit-constructs.TexitWorkflowsStackProps.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method to use while deploying this stack. |
 | <code><a href="#texit-constructs.TexitWorkflowsStackProps.property.tags">tags</a></code> | <code>{[ key: string ]: string}</code> | Stack tags that will be applied to all the taggable resources and the stack itself. |
 | <code><a href="#texit-constructs.TexitWorkflowsStackProps.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether to enable termination protection for this stack. |
-| <code><a href="#texit-constructs.TexitWorkflowsStackProps.property.binaryPath">binaryPath</a></code> | <code>string</code> | The path to the directory containing the Texit SFN Activity binary. |
+| <code><a href="#texit-constructs.TexitWorkflowsStackProps.property.binary">binary</a></code> | <code>aws-cdk-lib.aws_lambda.Code</code> | The code asset to deploy. |
 | <code><a href="#texit-constructs.TexitWorkflowsStackProps.property.configBucket">configBucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | The S3 bucket containing the Texit configuration file. |
 | <code><a href="#texit-constructs.TexitWorkflowsStackProps.property.executionTable">executionTable</a></code> | <code>aws-cdk-lib.aws_dynamodb.ITable</code> | The Execution DDB Table. |
 | <code><a href="#texit-constructs.TexitWorkflowsStackProps.property.nodeTable">nodeTable</a></code> | <code>aws-cdk-lib.aws_dynamodb.ITable</code> | The Node DDB Table. |
@@ -7484,15 +7484,15 @@ Whether to enable termination protection for this stack.
 
 ---
 
-##### `binaryPath`<sup>Required</sup> <a name="binaryPath" id="texit-constructs.TexitWorkflowsStackProps.property.binaryPath"></a>
+##### `binary`<sup>Required</sup> <a name="binary" id="texit-constructs.TexitWorkflowsStackProps.property.binary"></a>
 
 ```typescript
-public readonly binaryPath: string;
+public readonly binary: Code;
 ```
 
-- *Type:* string
+- *Type:* aws-cdk-lib.aws_lambda.Code
 
-The path to the directory containing the Texit SFN Activity binary.
+The code asset to deploy.
 
 ---
 
@@ -7559,7 +7559,7 @@ const workflowHandlerProps: WorkflowHandlerProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#texit-constructs.WorkflowHandlerProps.property.binaryPath">binaryPath</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#texit-constructs.WorkflowHandlerProps.property.binary">binary</a></code> | <code>aws-cdk-lib.aws_lambda.Code</code> | *No description.* |
 | <code><a href="#texit-constructs.WorkflowHandlerProps.property.configBucket">configBucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
 | <code><a href="#texit-constructs.WorkflowHandlerProps.property.architecture">architecture</a></code> | <code>aws-cdk-lib.aws_lambda.Architecture</code> | *No description.* |
 | <code><a href="#texit-constructs.WorkflowHandlerProps.property.configObject">configObject</a></code> | <code>string</code> | *No description.* |
@@ -7570,13 +7570,13 @@ const workflowHandlerProps: WorkflowHandlerProps = { ... }
 
 ---
 
-##### `binaryPath`<sup>Required</sup> <a name="binaryPath" id="texit-constructs.WorkflowHandlerProps.property.binaryPath"></a>
+##### `binary`<sup>Required</sup> <a name="binary" id="texit-constructs.WorkflowHandlerProps.property.binary"></a>
 
 ```typescript
-public readonly binaryPath: string;
+public readonly binary: Code;
 ```
 
-- *Type:* string
+- *Type:* aws-cdk-lib.aws_lambda.Code
 
 ---
 

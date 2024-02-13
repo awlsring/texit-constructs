@@ -23,7 +23,7 @@ export interface TexitHandlerProps {
 }
 
 export interface TexitApiProps {
-  readonly binaryPath: string;
+  readonly binary: Code;
   readonly configBucket: IBucket;
   readonly nodeTable: ITable;
   readonly executionTable: ITable;
@@ -43,7 +43,7 @@ export class TexitApi extends Construct {
     this.handler = new Function(this, 'api-handler', {
       functionName: props.handler?.functionName ?? 'TexitApiHandler',
       handler: 'main',
-      code: Code.fromAsset(props.binaryPath),
+      code: props.binary,
       runtime: Runtime.PROVIDED_AL2023,
       architecture: props.handler?.architecture ?? Architecture.ARM_64,
       logRetention: props.handler?.logRetention ?? RetentionDays.ONE_WEEK,

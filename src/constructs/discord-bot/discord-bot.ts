@@ -21,7 +21,7 @@ export interface DiscordHandlerProps {
 }
 
 export interface TexitDiscordBotProps {
-  readonly binaryPath: string;
+  readonly binary: Code;
   readonly handler?: DiscordHandlerProps;
   readonly configBucket: IBucket;
   readonly configObject?: string;
@@ -38,7 +38,7 @@ export class TexitDiscordBot extends Construct {
     this.handler = new Function(this, 'api-handler', {
       functionName: props.handler?.functionName ?? 'TexitDiscordBotHandler',
       handler: 'main',
-      code: Code.fromAsset(props.binaryPath),
+      code: props.binary,
       runtime: Runtime.PROVIDED_AL2023,
       architecture: props.handler?.architecture ?? Architecture.ARM_64,
       logRetention: props.handler?.logRetention ?? RetentionDays.ONE_WEEK,

@@ -6,7 +6,7 @@ import { Construct } from 'constructs';
 
 export interface WorkflowHandlerProps {
   readonly configBucket: IBucket;
-  readonly binaryPath: string;
+  readonly binary: Code;
   readonly configObject?: string;
   readonly functionName?: string;
   readonly environment?: Record<string, string>;
@@ -21,7 +21,7 @@ export class WorkflowHandler extends Function {
       runtime: Runtime.PROVIDED_AL2023,
       functionName: props.functionName ?? 'TexitActivityHandler',
       handler: 'main',
-      code: Code.fromAsset(props.binaryPath),
+      code: props.binary,
       architecture: Architecture.ARM_64,
       logRetention: RetentionDays.ONE_WEEK,
       timeout: Duration.seconds(30),

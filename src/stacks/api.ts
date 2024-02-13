@@ -1,7 +1,7 @@
 import { CfnOutput, Stack, StackProps } from 'aws-cdk-lib';
 import { HttpApi } from 'aws-cdk-lib/aws-apigatewayv2';
 import { ITable } from 'aws-cdk-lib/aws-dynamodb';
-import { IFunction } from 'aws-cdk-lib/aws-lambda';
+import { IFunction, Code } from 'aws-cdk-lib/aws-lambda';
 import { IBucket } from 'aws-cdk-lib/aws-s3';
 import { IStateMachine } from 'aws-cdk-lib/aws-stepfunctions';
 import { Construct } from 'constructs';
@@ -9,9 +9,9 @@ import { TexitApi } from '../constructs/texit/texit-api';
 
 export interface TexitApiStackProps extends StackProps {
   /**
-   * The path to the directory containing the Texit binary.
+   * The code asset to deploy
    */
-  readonly binaryPath: string;
+  readonly binary: Code;
   /**
    * The S3 bucket containing the Texit configuration file.
    */
@@ -51,7 +51,7 @@ export class TexitApiStack extends Stack {
     super(scope, id, props);
 
     const texit = new TexitApi(this, 'api', {
-      binaryPath: props.binaryPath,
+      binary: props.binary,
       configBucket: props.configBucket,
       configObject: props.configObject,
       nodeTable: props.nodeTable,

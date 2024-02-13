@@ -1,5 +1,6 @@
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { ITable } from 'aws-cdk-lib/aws-dynamodb';
+import { Code } from 'aws-cdk-lib/aws-lambda';
 import { IBucket } from 'aws-cdk-lib/aws-s3';
 import { IStateMachine } from 'aws-cdk-lib/aws-stepfunctions';
 import { Construct } from 'constructs';
@@ -9,9 +10,9 @@ import { WorkflowHandler } from '../constructs/texit/workflow/workflow-handler';
 
 export interface TexitWorkflowsStackProps extends StackProps {
   /**
-   * The path to the directory containing the Texit SFN Activity binary.
+   * The code asset to deploy
    */
-  readonly binaryPath: string;
+  readonly binary: Code;
   /**
    * The S3 bucket containing the Texit configuration file.
    */
@@ -43,7 +44,7 @@ export class TexitWorkflowsStack extends Stack {
     super(scope, id, props);
 
     const handler = new WorkflowHandler(this, 'workflow-handler', {
-      binaryPath: props.binaryPath,
+      binary: props.binary,
       configBucket: props.configBucket,
       configObject: props.configObject,
     });
