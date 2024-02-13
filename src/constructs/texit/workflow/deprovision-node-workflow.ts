@@ -78,9 +78,8 @@ export class DeprovisionNodeWorkflow extends TexitWorkflow {
           executionId: JsonPath.stringAt('$.executionId'),
           status: 'failed',
           results: TaskInput.fromObject({
-            error: JsonPath.stringAt('$.error'),
-            failedStep: 'a',
-          }),
+            error: JsonPath.stringAt('$.error.Cause'),
+          }).value,
         }),
       },
     );

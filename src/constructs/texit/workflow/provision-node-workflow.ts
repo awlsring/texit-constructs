@@ -147,7 +147,7 @@ export class ProvisionNodeWorkflow extends TexitWorkflow {
           executionId: JsonPath.stringAt('$.executionId'),
           status: 'failed',
           results: TaskInput.fromObject({
-            error: JsonPath.stringAt('$.error'),
+            error: JsonPath.stringAt('$.error.Cause'),
             failedStep: 'GetTailnetDeviceId',
           }).value,
         }),
