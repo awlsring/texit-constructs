@@ -1382,6 +1382,7 @@ The construct to start the search from.
 | <code><a href="#texit-constructs.TexitApiStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
 | <code><a href="#texit-constructs.TexitApiStack.property.api">api</a></code> | <code>aws-cdk-lib.aws_apigatewayv2.HttpApi</code> | *No description.* |
 | <code><a href="#texit-constructs.TexitApiStack.property.handler">handler</a></code> | <code>aws-cdk-lib.aws_lambda.IFunction</code> | *No description.* |
+| <code><a href="#texit-constructs.TexitApiStack.property.notifierTopic">notifierTopic</a></code> | <code>aws-cdk-lib.aws_sns.ITopic</code> | *No description.* |
 
 ---
 
@@ -1732,6 +1733,16 @@ public readonly handler: IFunction;
 ```
 
 - *Type:* aws-cdk-lib.aws_lambda.IFunction
+
+---
+
+##### `notifierTopic`<sup>Optional</sup> <a name="notifierTopic" id="texit-constructs.TexitApiStack.property.notifierTopic"></a>
+
+```typescript
+public readonly notifierTopic: ITopic;
+```
+
+- *Type:* aws-cdk-lib.aws_sns.ITopic
 
 ---
 

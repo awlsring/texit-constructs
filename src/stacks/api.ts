@@ -3,6 +3,7 @@ import { HttpApi } from 'aws-cdk-lib/aws-apigatewayv2';
 import { ITable } from 'aws-cdk-lib/aws-dynamodb';
 import { IFunction, Code } from 'aws-cdk-lib/aws-lambda';
 import { IBucket } from 'aws-cdk-lib/aws-s3';
+import { ITopic } from 'aws-cdk-lib/aws-sns';
 import { IStateMachine } from 'aws-cdk-lib/aws-stepfunctions';
 import { Construct } from 'constructs';
 import { TexitApi } from '../constructs/texit/texit-api';
@@ -49,15 +50,15 @@ export interface TexitApiStackProps extends StackProps {
  * Stack that deploys the Texit API.
  */
 export class TexitApiStack extends Stack {
+  readonly notifierTopic?: ITopic;
   readonly handler: IFunction;
   readonly api: HttpApi;
 
   constructor(scope: Construct, id: string, props: TexitApiStackProps) {
     super(scope, id, props);
 
-    let snsNotifier: TexitSnsNotifier | undefined;
     if (!props.disableNotifier) {
-      snsNotifier = new TexitSnsNotifier(this, 'notifier');
+      this.notifierTopic = new TexitSnsNotifier(this, 'notifier');
     }
 
     const texit = new TexitApi(this, 'api', {
@@ -68,7 +69,7 @@ export class TexitApiStack extends Stack {
       executionTable: props.executionTable,
       provisionNodeWorkflow: props.provisionNodeWorkflow,
       deployNodeWorkflow: props.deployNodeWorkflow,
-      snsNotifier: snsNotifier,
+      snsNotifier: this.notifierTopic,
     });
     this.handler = texit.handler;
     this.api = texit.api;
