@@ -82,6 +82,7 @@ export class TexitDiscordBot extends Construct {
         TRACKED_EXECUTION_TABLE: this.trackedExecution.tableName,
       },
     });
+    props.configBucket.grantRead(this.handler);
     this.trackedExecution.grantReadWriteData(this.callbackHandler);
     this.callbackHandler.addEventSource(new SnsEventSource(props.callbackTopic));
 
