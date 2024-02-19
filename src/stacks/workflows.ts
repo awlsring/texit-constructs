@@ -2,6 +2,7 @@ import { Stack, StackProps } from 'aws-cdk-lib';
 import { ITable } from 'aws-cdk-lib/aws-dynamodb';
 import { Code } from 'aws-cdk-lib/aws-lambda';
 import { IBucket } from 'aws-cdk-lib/aws-s3';
+import { ITopic } from 'aws-cdk-lib/aws-sns';
 import { IStateMachine } from 'aws-cdk-lib/aws-stepfunctions';
 import { Construct } from 'constructs';
 import { DeprovisionNodeWorkflow } from '../constructs/texit/workflow/deprovision-node-workflow';
@@ -31,6 +32,10 @@ export interface TexitWorkflowsStackProps extends StackProps {
    * @default config.yaml
    */
   readonly configObject?: string;
+  /**
+   * The SNS Notifier Topic.
+   */
+  readonly notifierTopic?: ITopic;
 }
 
 /**
@@ -47,6 +52,7 @@ export class TexitWorkflowsStack extends Stack {
       binary: props.binary,
       configBucket: props.configBucket,
       configObject: props.configObject,
+      snsNotifier: props.notifierTopic,
     });
     props.configBucket.grantRead(handler);
     props.nodeTable.grantReadWriteData(handler);

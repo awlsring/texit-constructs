@@ -185,15 +185,7 @@ export class ProvisionNodeWorkflow extends TexitWorkflow {
       outputPath: '$[0]',
     }).branch(chain);
 
-    const failurePass = new Pass(this, 'FailurePass', {
-      parameters: {
-        error: JsonPath.stringAt('$.error'),
-      },
-      resultPath: '$.error',
-    });
-    failurePass.next(closeExecutionFailure);
-
-    container.addCatch(failurePass, {
+    container.addCatch(closeExecutionFailure, {
       errors: ['States.ALL'],
       resultPath: '$.error',
     });

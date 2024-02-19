@@ -7946,6 +7946,7 @@ const texitWorkflowsStackProps: TexitWorkflowsStackProps = { ... }
 | <code><a href="#texit-constructs.TexitWorkflowsStackProps.property.executionTable">executionTable</a></code> | <code>aws-cdk-lib.aws_dynamodb.ITable</code> | The Execution DDB Table. |
 | <code><a href="#texit-constructs.TexitWorkflowsStackProps.property.nodeTable">nodeTable</a></code> | <code>aws-cdk-lib.aws_dynamodb.ITable</code> | The Node DDB Table. |
 | <code><a href="#texit-constructs.TexitWorkflowsStackProps.property.configObject">configObject</a></code> | <code>string</code> | The object key of the Texit configuration file. |
+| <code><a href="#texit-constructs.TexitWorkflowsStackProps.property.notifierTopic">notifierTopic</a></code> | <code>aws-cdk-lib.aws_sns.ITopic</code> | The SNS Notifier Topic. |
 
 ---
 
@@ -8217,6 +8218,18 @@ public readonly configObject: string;
 - *Default:* config.yaml
 
 The object key of the Texit configuration file.
+
+---
+
+##### `notifierTopic`<sup>Optional</sup> <a name="notifierTopic" id="texit-constructs.TexitWorkflowsStackProps.property.notifierTopic"></a>
+
+```typescript
+public readonly notifierTopic: ITopic;
+```
+
+- *Type:* aws-cdk-lib.aws_sns.ITopic
+
+The SNS Notifier Topic.
 
 ---
 
