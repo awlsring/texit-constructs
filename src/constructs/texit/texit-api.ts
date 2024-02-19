@@ -65,9 +65,7 @@ export class TexitApi extends Construct {
     props.executionTable.grantReadWriteData(this.handler);
     props.provisionNodeWorkflow.grantStartExecution(this.handler);
     props.deployNodeWorkflow.grantStartExecution(this.handler);
-    if (props.snsNotifier) {
-      props.snsNotifier.grantPublish(this.handler);
-    }
+    props.snsNotifier?.grantPublish(this.handler);
 
     const integration = new HttpLambdaIntegration(
       'api-integration',

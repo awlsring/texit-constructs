@@ -34,5 +34,6 @@ export class WorkflowHandler extends Function {
         ...props.environment,
       },
     });
+    props.snsNotifier?.grantPublish(this);
   }
 }
