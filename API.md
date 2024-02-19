@@ -1382,7 +1382,6 @@ The construct to start the search from.
 | <code><a href="#texit-constructs.TexitApiStack.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether termination protection is enabled for this stack. |
 | <code><a href="#texit-constructs.TexitApiStack.property.api">api</a></code> | <code>aws-cdk-lib.aws_apigatewayv2.HttpApi</code> | *No description.* |
 | <code><a href="#texit-constructs.TexitApiStack.property.handler">handler</a></code> | <code>aws-cdk-lib.aws_lambda.IFunction</code> | *No description.* |
-| <code><a href="#texit-constructs.TexitApiStack.property.notifierTopic">notifierTopic</a></code> | <code>aws-cdk-lib.aws_sns.ITopic</code> | *No description.* |
 
 ---
 
@@ -1733,16 +1732,6 @@ public readonly handler: IFunction;
 ```
 
 - *Type:* aws-cdk-lib.aws_lambda.IFunction
-
----
-
-##### `notifierTopic`<sup>Optional</sup> <a name="notifierTopic" id="texit-constructs.TexitApiStack.property.notifierTopic"></a>
-
-```typescript
-public readonly notifierTopic: ITopic;
-```
-
-- *Type:* aws-cdk-lib.aws_sns.ITopic
 
 ---
 
@@ -2910,6 +2899,537 @@ public readonly handler: IFunction;
 ---
 
 
+### TexitSnsNotifier <a name="TexitSnsNotifier" id="texit-constructs.TexitSnsNotifier"></a>
+
+#### Initializers <a name="Initializers" id="texit-constructs.TexitSnsNotifier.Initializer"></a>
+
+```typescript
+import { TexitSnsNotifier } from 'texit-constructs'
+
+new TexitSnsNotifier(scope: Construct, id: string, props?: TexitSnsNotifierProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#texit-constructs.TexitSnsNotifier.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#texit-constructs.TexitSnsNotifier.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#texit-constructs.TexitSnsNotifier.Initializer.parameter.props">props</a></code> | <code><a href="#texit-constructs.TexitSnsNotifierProps">TexitSnsNotifierProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="texit-constructs.TexitSnsNotifier.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="texit-constructs.TexitSnsNotifier.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Optional</sup> <a name="props" id="texit-constructs.TexitSnsNotifier.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#texit-constructs.TexitSnsNotifierProps">TexitSnsNotifierProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#texit-constructs.TexitSnsNotifier.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.addSubscription">addSubscription</a></code> | Subscribe some endpoint to this topic. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.addToResourcePolicy">addToResourcePolicy</a></code> | Adds a statement to the IAM resource policy associated with this topic. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.bindAsNotificationRuleTarget">bindAsNotificationRuleTarget</a></code> | Represents a notification target That allows SNS topic to associate with this rule target. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.grantPublish">grantPublish</a></code> | Grant topic publishing permissions to the given identity. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.metric">metric</a></code> | Return the given named metric for this Topic. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.metricNumberOfMessagesPublished">metricNumberOfMessagesPublished</a></code> | The number of messages published to your Amazon SNS topics. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.metricNumberOfNotificationsDelivered">metricNumberOfNotificationsDelivered</a></code> | The number of messages successfully delivered from your Amazon SNS topics to subscribing endpoints. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.metricNumberOfNotificationsFailed">metricNumberOfNotificationsFailed</a></code> | The number of messages that Amazon SNS failed to deliver. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.metricNumberOfNotificationsFilteredOut">metricNumberOfNotificationsFilteredOut</a></code> | The number of messages that were rejected by subscription filter policies. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.metricNumberOfNotificationsFilteredOutInvalidAttributes">metricNumberOfNotificationsFilteredOutInvalidAttributes</a></code> | The number of messages that were rejected by subscription filter policies because the messages' attributes are invalid. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.metricNumberOfNotificationsFilteredOutNoMessageAttributes">metricNumberOfNotificationsFilteredOutNoMessageAttributes</a></code> | The number of messages that were rejected by subscription filter policies because the messages have no attributes. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.metricPublishSize">metricPublishSize</a></code> | Metric for the size of messages published through this topic. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.metricSMSMonthToDateSpentUSD">metricSMSMonthToDateSpentUSD</a></code> | The charges you have accrued since the start of the current calendar month for sending SMS messages. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.metricSMSSuccessRate">metricSMSSuccessRate</a></code> | The rate of successful SMS message deliveries. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.addLoggingConfig">addLoggingConfig</a></code> | Adds a delivery status logging configuration to the topic. |
+
+---
+
+##### `toString` <a name="toString" id="texit-constructs.TexitSnsNotifier.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="texit-constructs.TexitSnsNotifier.applyRemovalPolicy"></a>
+
+```typescript
+public applyRemovalPolicy(policy: RemovalPolicy): void
+```
+
+Apply the given removal policy to this resource.
+
+The Removal Policy controls what happens to this resource when it stops
+being managed by CloudFormation, either because you've removed it from the
+CDK application or because you've made a change that requires the resource
+to be replaced.
+
+The resource can be deleted (`RemovalPolicy.DESTROY`), or left in your AWS
+account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
+
+###### `policy`<sup>Required</sup> <a name="policy" id="texit-constructs.TexitSnsNotifier.applyRemovalPolicy.parameter.policy"></a>
+
+- *Type:* aws-cdk-lib.RemovalPolicy
+
+---
+
+##### `addSubscription` <a name="addSubscription" id="texit-constructs.TexitSnsNotifier.addSubscription"></a>
+
+```typescript
+public addSubscription(topicSubscription: ITopicSubscription): Subscription
+```
+
+Subscribe some endpoint to this topic.
+
+###### `topicSubscription`<sup>Required</sup> <a name="topicSubscription" id="texit-constructs.TexitSnsNotifier.addSubscription.parameter.topicSubscription"></a>
+
+- *Type:* aws-cdk-lib.aws_sns.ITopicSubscription
+
+---
+
+##### `addToResourcePolicy` <a name="addToResourcePolicy" id="texit-constructs.TexitSnsNotifier.addToResourcePolicy"></a>
+
+```typescript
+public addToResourcePolicy(statement: PolicyStatement): AddToResourcePolicyResult
+```
+
+Adds a statement to the IAM resource policy associated with this topic.
+
+If this topic was created in this stack (`new Topic`), a topic policy
+will be automatically created upon the first call to `addToPolicy`. If
+the topic is imported (`Topic.import`), then this is a no-op.
+
+###### `statement`<sup>Required</sup> <a name="statement" id="texit-constructs.TexitSnsNotifier.addToResourcePolicy.parameter.statement"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.PolicyStatement
+
+---
+
+##### `bindAsNotificationRuleTarget` <a name="bindAsNotificationRuleTarget" id="texit-constructs.TexitSnsNotifier.bindAsNotificationRuleTarget"></a>
+
+```typescript
+public bindAsNotificationRuleTarget(_scope: Construct): NotificationRuleTargetConfig
+```
+
+Represents a notification target That allows SNS topic to associate with this rule target.
+
+###### `_scope`<sup>Required</sup> <a name="_scope" id="texit-constructs.TexitSnsNotifier.bindAsNotificationRuleTarget.parameter._scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `grantPublish` <a name="grantPublish" id="texit-constructs.TexitSnsNotifier.grantPublish"></a>
+
+```typescript
+public grantPublish(grantee: IGrantable): Grant
+```
+
+Grant topic publishing permissions to the given identity.
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="texit-constructs.TexitSnsNotifier.grantPublish.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IGrantable
+
+---
+
+##### `metric` <a name="metric" id="texit-constructs.TexitSnsNotifier.metric"></a>
+
+```typescript
+public metric(metricName: string, props?: MetricOptions): Metric
+```
+
+Return the given named metric for this Topic.
+
+###### `metricName`<sup>Required</sup> <a name="metricName" id="texit-constructs.TexitSnsNotifier.metric.parameter.metricName"></a>
+
+- *Type:* string
+
+---
+
+###### `props`<sup>Optional</sup> <a name="props" id="texit-constructs.TexitSnsNotifier.metric.parameter.props"></a>
+
+- *Type:* aws-cdk-lib.aws_cloudwatch.MetricOptions
+
+---
+
+##### `metricNumberOfMessagesPublished` <a name="metricNumberOfMessagesPublished" id="texit-constructs.TexitSnsNotifier.metricNumberOfMessagesPublished"></a>
+
+```typescript
+public metricNumberOfMessagesPublished(props?: MetricOptions): Metric
+```
+
+The number of messages published to your Amazon SNS topics.
+
+Sum over 5 minutes
+
+###### `props`<sup>Optional</sup> <a name="props" id="texit-constructs.TexitSnsNotifier.metricNumberOfMessagesPublished.parameter.props"></a>
+
+- *Type:* aws-cdk-lib.aws_cloudwatch.MetricOptions
+
+---
+
+##### `metricNumberOfNotificationsDelivered` <a name="metricNumberOfNotificationsDelivered" id="texit-constructs.TexitSnsNotifier.metricNumberOfNotificationsDelivered"></a>
+
+```typescript
+public metricNumberOfNotificationsDelivered(props?: MetricOptions): Metric
+```
+
+The number of messages successfully delivered from your Amazon SNS topics to subscribing endpoints.
+
+Sum over 5 minutes
+
+###### `props`<sup>Optional</sup> <a name="props" id="texit-constructs.TexitSnsNotifier.metricNumberOfNotificationsDelivered.parameter.props"></a>
+
+- *Type:* aws-cdk-lib.aws_cloudwatch.MetricOptions
+
+---
+
+##### `metricNumberOfNotificationsFailed` <a name="metricNumberOfNotificationsFailed" id="texit-constructs.TexitSnsNotifier.metricNumberOfNotificationsFailed"></a>
+
+```typescript
+public metricNumberOfNotificationsFailed(props?: MetricOptions): Metric
+```
+
+The number of messages that Amazon SNS failed to deliver.
+
+Sum over 5 minutes
+
+###### `props`<sup>Optional</sup> <a name="props" id="texit-constructs.TexitSnsNotifier.metricNumberOfNotificationsFailed.parameter.props"></a>
+
+- *Type:* aws-cdk-lib.aws_cloudwatch.MetricOptions
+
+---
+
+##### `metricNumberOfNotificationsFilteredOut` <a name="metricNumberOfNotificationsFilteredOut" id="texit-constructs.TexitSnsNotifier.metricNumberOfNotificationsFilteredOut"></a>
+
+```typescript
+public metricNumberOfNotificationsFilteredOut(props?: MetricOptions): Metric
+```
+
+The number of messages that were rejected by subscription filter policies.
+
+Sum over 5 minutes
+
+###### `props`<sup>Optional</sup> <a name="props" id="texit-constructs.TexitSnsNotifier.metricNumberOfNotificationsFilteredOut.parameter.props"></a>
+
+- *Type:* aws-cdk-lib.aws_cloudwatch.MetricOptions
+
+---
+
+##### `metricNumberOfNotificationsFilteredOutInvalidAttributes` <a name="metricNumberOfNotificationsFilteredOutInvalidAttributes" id="texit-constructs.TexitSnsNotifier.metricNumberOfNotificationsFilteredOutInvalidAttributes"></a>
+
+```typescript
+public metricNumberOfNotificationsFilteredOutInvalidAttributes(props?: MetricOptions): Metric
+```
+
+The number of messages that were rejected by subscription filter policies because the messages' attributes are invalid.
+
+Sum over 5 minutes
+
+###### `props`<sup>Optional</sup> <a name="props" id="texit-constructs.TexitSnsNotifier.metricNumberOfNotificationsFilteredOutInvalidAttributes.parameter.props"></a>
+
+- *Type:* aws-cdk-lib.aws_cloudwatch.MetricOptions
+
+---
+
+##### `metricNumberOfNotificationsFilteredOutNoMessageAttributes` <a name="metricNumberOfNotificationsFilteredOutNoMessageAttributes" id="texit-constructs.TexitSnsNotifier.metricNumberOfNotificationsFilteredOutNoMessageAttributes"></a>
+
+```typescript
+public metricNumberOfNotificationsFilteredOutNoMessageAttributes(props?: MetricOptions): Metric
+```
+
+The number of messages that were rejected by subscription filter policies because the messages have no attributes.
+
+Sum over 5 minutes
+
+###### `props`<sup>Optional</sup> <a name="props" id="texit-constructs.TexitSnsNotifier.metricNumberOfNotificationsFilteredOutNoMessageAttributes.parameter.props"></a>
+
+- *Type:* aws-cdk-lib.aws_cloudwatch.MetricOptions
+
+---
+
+##### `metricPublishSize` <a name="metricPublishSize" id="texit-constructs.TexitSnsNotifier.metricPublishSize"></a>
+
+```typescript
+public metricPublishSize(props?: MetricOptions): Metric
+```
+
+Metric for the size of messages published through this topic.
+
+Average over 5 minutes
+
+###### `props`<sup>Optional</sup> <a name="props" id="texit-constructs.TexitSnsNotifier.metricPublishSize.parameter.props"></a>
+
+- *Type:* aws-cdk-lib.aws_cloudwatch.MetricOptions
+
+---
+
+##### `metricSMSMonthToDateSpentUSD` <a name="metricSMSMonthToDateSpentUSD" id="texit-constructs.TexitSnsNotifier.metricSMSMonthToDateSpentUSD"></a>
+
+```typescript
+public metricSMSMonthToDateSpentUSD(props?: MetricOptions): Metric
+```
+
+The charges you have accrued since the start of the current calendar month for sending SMS messages.
+
+Maximum over 5 minutes
+
+###### `props`<sup>Optional</sup> <a name="props" id="texit-constructs.TexitSnsNotifier.metricSMSMonthToDateSpentUSD.parameter.props"></a>
+
+- *Type:* aws-cdk-lib.aws_cloudwatch.MetricOptions
+
+---
+
+##### `metricSMSSuccessRate` <a name="metricSMSSuccessRate" id="texit-constructs.TexitSnsNotifier.metricSMSSuccessRate"></a>
+
+```typescript
+public metricSMSSuccessRate(props?: MetricOptions): Metric
+```
+
+The rate of successful SMS message deliveries.
+
+Sum over 5 minutes
+
+###### `props`<sup>Optional</sup> <a name="props" id="texit-constructs.TexitSnsNotifier.metricSMSSuccessRate.parameter.props"></a>
+
+- *Type:* aws-cdk-lib.aws_cloudwatch.MetricOptions
+
+---
+
+##### `addLoggingConfig` <a name="addLoggingConfig" id="texit-constructs.TexitSnsNotifier.addLoggingConfig"></a>
+
+```typescript
+public addLoggingConfig(config: LoggingConfig): void
+```
+
+Adds a delivery status logging configuration to the topic.
+
+###### `config`<sup>Required</sup> <a name="config" id="texit-constructs.TexitSnsNotifier.addLoggingConfig.parameter.config"></a>
+
+- *Type:* aws-cdk-lib.aws_sns.LoggingConfig
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#texit-constructs.TexitSnsNotifier.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.isOwnedResource">isOwnedResource</a></code> | Returns true if the construct was created by CDK, and false otherwise. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.isResource">isResource</a></code> | Check whether the given construct is a Resource. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.fromTopicArn">fromTopicArn</a></code> | Import an existing SNS topic provided an ARN. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="texit-constructs.TexitSnsNotifier.isConstruct"></a>
+
+```typescript
+import { TexitSnsNotifier } from 'texit-constructs'
+
+TexitSnsNotifier.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="texit-constructs.TexitSnsNotifier.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `isOwnedResource` <a name="isOwnedResource" id="texit-constructs.TexitSnsNotifier.isOwnedResource"></a>
+
+```typescript
+import { TexitSnsNotifier } from 'texit-constructs'
+
+TexitSnsNotifier.isOwnedResource(construct: IConstruct)
+```
+
+Returns true if the construct was created by CDK, and false otherwise.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="texit-constructs.TexitSnsNotifier.isOwnedResource.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
+
+---
+
+##### `isResource` <a name="isResource" id="texit-constructs.TexitSnsNotifier.isResource"></a>
+
+```typescript
+import { TexitSnsNotifier } from 'texit-constructs'
+
+TexitSnsNotifier.isResource(construct: IConstruct)
+```
+
+Check whether the given construct is a Resource.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="texit-constructs.TexitSnsNotifier.isResource.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
+
+---
+
+##### `fromTopicArn` <a name="fromTopicArn" id="texit-constructs.TexitSnsNotifier.fromTopicArn"></a>
+
+```typescript
+import { TexitSnsNotifier } from 'texit-constructs'
+
+TexitSnsNotifier.fromTopicArn(scope: Construct, id: string, topicArn: string)
+```
+
+Import an existing SNS topic provided an ARN.
+
+###### `scope`<sup>Required</sup> <a name="scope" id="texit-constructs.TexitSnsNotifier.fromTopicArn.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+The parent creating construct.
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="texit-constructs.TexitSnsNotifier.fromTopicArn.parameter.id"></a>
+
+- *Type:* string
+
+The construct's name.
+
+---
+
+###### `topicArn`<sup>Required</sup> <a name="topicArn" id="texit-constructs.TexitSnsNotifier.fromTopicArn.parameter.topicArn"></a>
+
+- *Type:* string
+
+topic ARN (i.e. arn:aws:sns:us-east-2:444455556666:MyTopic).
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#texit-constructs.TexitSnsNotifier.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.property.contentBasedDeduplication">contentBasedDeduplication</a></code> | <code>boolean</code> | Enables content-based deduplication for FIFO topics. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.property.fifo">fifo</a></code> | <code>boolean</code> | Whether this topic is an Amazon SNS FIFO queue. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.property.topicArn">topicArn</a></code> | <code>string</code> | The ARN of the topic. |
+| <code><a href="#texit-constructs.TexitSnsNotifier.property.topicName">topicName</a></code> | <code>string</code> | The name of the topic. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="texit-constructs.TexitSnsNotifier.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `env`<sup>Required</sup> <a name="env" id="texit-constructs.TexitSnsNotifier.property.env"></a>
+
+```typescript
+public readonly env: ResourceEnvironment;
+```
+
+- *Type:* aws-cdk-lib.ResourceEnvironment
+
+The environment this resource belongs to.
+
+For resources that are created and managed by the CDK
+(generally, those created by creating new class instances like Role, Bucket, etc.),
+this is always the same as the environment of the stack they belong to;
+however, for imported resources
+(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
+that might be different than the stack they were imported into.
+
+---
+
+##### `stack`<sup>Required</sup> <a name="stack" id="texit-constructs.TexitSnsNotifier.property.stack"></a>
+
+```typescript
+public readonly stack: Stack;
+```
+
+- *Type:* aws-cdk-lib.Stack
+
+The stack in which this resource is defined.
+
+---
+
+##### `contentBasedDeduplication`<sup>Required</sup> <a name="contentBasedDeduplication" id="texit-constructs.TexitSnsNotifier.property.contentBasedDeduplication"></a>
+
+```typescript
+public readonly contentBasedDeduplication: boolean;
+```
+
+- *Type:* boolean
+
+Enables content-based deduplication for FIFO topics.
+
+---
+
+##### `fifo`<sup>Required</sup> <a name="fifo" id="texit-constructs.TexitSnsNotifier.property.fifo"></a>
+
+```typescript
+public readonly fifo: boolean;
+```
+
+- *Type:* boolean
+
+Whether this topic is an Amazon SNS FIFO queue.
+
+If false, this is a standard topic.
+
+---
+
+##### `topicArn`<sup>Required</sup> <a name="topicArn" id="texit-constructs.TexitSnsNotifier.property.topicArn"></a>
+
+```typescript
+public readonly topicArn: string;
+```
+
+- *Type:* string
+
+The ARN of the topic.
+
+---
+
+##### `topicName`<sup>Required</sup> <a name="topicName" id="texit-constructs.TexitSnsNotifier.property.topicName"></a>
+
+```typescript
+public readonly topicName: string;
+```
+
+- *Type:* string
+
+The name of the topic.
+
+---
+
+
 ### TexitStatefulResourcesStack <a name="TexitStatefulResourcesStack" id="texit-constructs.TexitStatefulResourcesStack"></a>
 
 Stack that deploys stateful texit resources.
@@ -3460,6 +3980,7 @@ The construct to start the search from.
 | <code><a href="#texit-constructs.TexitStatefulResourcesStack.property.configBucket">configBucket</a></code> | <code>aws-cdk-lib.aws_s3.Bucket</code> | *No description.* |
 | <code><a href="#texit-constructs.TexitStatefulResourcesStack.property.executionsTable">executionsTable</a></code> | <code>aws-cdk-lib.aws_dynamodb.ITable</code> | *No description.* |
 | <code><a href="#texit-constructs.TexitStatefulResourcesStack.property.nodesTable">nodesTable</a></code> | <code>aws-cdk-lib.aws_dynamodb.ITable</code> | *No description.* |
+| <code><a href="#texit-constructs.TexitStatefulResourcesStack.property.notifierTopic">notifierTopic</a></code> | <code><a href="#texit-constructs.TexitSnsNotifier">TexitSnsNotifier</a></code> | *No description.* |
 
 ---
 
@@ -3820,6 +4341,16 @@ public readonly nodesTable: ITable;
 ```
 
 - *Type:* aws-cdk-lib.aws_dynamodb.ITable
+
+---
+
+##### `notifierTopic`<sup>Required</sup> <a name="notifierTopic" id="texit-constructs.TexitStatefulResourcesStack.property.notifierTopic"></a>
+
+```typescript
+public readonly notifierTopic: TexitSnsNotifier;
+```
+
+- *Type:* <a href="#texit-constructs.TexitSnsNotifier">TexitSnsNotifier</a>
 
 ---
 
@@ -6485,7 +7016,7 @@ const texitApiStackProps: TexitApiStackProps = { ... }
 | <code><a href="#texit-constructs.TexitApiStackProps.property.nodeTable">nodeTable</a></code> | <code>aws-cdk-lib.aws_dynamodb.ITable</code> | The Node DDB Table. |
 | <code><a href="#texit-constructs.TexitApiStackProps.property.provisionNodeWorkflow">provisionNodeWorkflow</a></code> | <code>aws-cdk-lib.aws_stepfunctions.IStateMachine</code> | The provision node workflow. |
 | <code><a href="#texit-constructs.TexitApiStackProps.property.configObject">configObject</a></code> | <code>string</code> | The object key of the Texit configuration file. |
-| <code><a href="#texit-constructs.TexitApiStackProps.property.disableNotifier">disableNotifier</a></code> | <code>boolean</code> | If the sns notifier should be made. |
+| <code><a href="#texit-constructs.TexitApiStackProps.property.notifierTopic">notifierTopic</a></code> | <code>aws-cdk-lib.aws_sns.ITopic</code> | The SNS Notifier Topic. |
 
 ---
 
@@ -6784,15 +7315,15 @@ The object key of the Texit configuration file.
 
 ---
 
-##### `disableNotifier`<sup>Optional</sup> <a name="disableNotifier" id="texit-constructs.TexitApiStackProps.property.disableNotifier"></a>
+##### `notifierTopic`<sup>Optional</sup> <a name="notifierTopic" id="texit-constructs.TexitApiStackProps.property.notifierTopic"></a>
 
 ```typescript
-public readonly disableNotifier: boolean;
+public readonly notifierTopic: ITopic;
 ```
 
-- *Type:* boolean
+- *Type:* aws-cdk-lib.aws_sns.ITopic
 
-If the sns notifier should be made.
+The SNS Notifier Topic.
 
 ---
 
@@ -7319,6 +7850,45 @@ public readonly timeout: Duration;
 
 ---
 
+### TexitSnsNotifierProps <a name="TexitSnsNotifierProps" id="texit-constructs.TexitSnsNotifierProps"></a>
+
+#### Initializer <a name="Initializer" id="texit-constructs.TexitSnsNotifierProps.Initializer"></a>
+
+```typescript
+import { TexitSnsNotifierProps } from 'texit-constructs'
+
+const texitSnsNotifierProps: TexitSnsNotifierProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#texit-constructs.TexitSnsNotifierProps.property.displayName">displayName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#texit-constructs.TexitSnsNotifierProps.property.topicName">topicName</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `displayName`<sup>Optional</sup> <a name="displayName" id="texit-constructs.TexitSnsNotifierProps.property.displayName"></a>
+
+```typescript
+public readonly displayName: string;
+```
+
+- *Type:* string
+
+---
+
+##### `topicName`<sup>Optional</sup> <a name="topicName" id="texit-constructs.TexitSnsNotifierProps.property.topicName"></a>
+
+```typescript
+public readonly topicName: string;
+```
+
+- *Type:* string
+
+---
+
 ### TexitWorkflowProps <a name="TexitWorkflowProps" id="texit-constructs.TexitWorkflowProps"></a>
 
 #### Initializer <a name="Initializer" id="texit-constructs.TexitWorkflowProps.Initializer"></a>
@@ -7671,6 +8241,7 @@ const workflowHandlerProps: WorkflowHandlerProps = { ... }
 | <code><a href="#texit-constructs.WorkflowHandlerProps.property.environment">environment</a></code> | <code>{[ key: string ]: string}</code> | *No description.* |
 | <code><a href="#texit-constructs.WorkflowHandlerProps.property.functionName">functionName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#texit-constructs.WorkflowHandlerProps.property.logRetention">logRetention</a></code> | <code>aws-cdk-lib.aws_logs.RetentionDays</code> | *No description.* |
+| <code><a href="#texit-constructs.WorkflowHandlerProps.property.snsNotifier">snsNotifier</a></code> | <code>aws-cdk-lib.aws_sns.ITopic</code> | *No description.* |
 | <code><a href="#texit-constructs.WorkflowHandlerProps.property.timeout">timeout</a></code> | <code>aws-cdk-lib.Duration</code> | *No description.* |
 
 ---
@@ -7742,6 +8313,16 @@ public readonly logRetention: RetentionDays;
 ```
 
 - *Type:* aws-cdk-lib.aws_logs.RetentionDays
+
+---
+
+##### `snsNotifier`<sup>Optional</sup> <a name="snsNotifier" id="texit-constructs.WorkflowHandlerProps.property.snsNotifier"></a>
+
+```typescript
+public readonly snsNotifier: ITopic;
+```
+
+- *Type:* aws-cdk-lib.aws_sns.ITopic
 
 ---
 

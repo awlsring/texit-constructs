@@ -7,7 +7,6 @@ import { ITopic } from 'aws-cdk-lib/aws-sns';
 import { IStateMachine } from 'aws-cdk-lib/aws-stepfunctions';
 import { Construct } from 'constructs';
 import { TexitApi } from '../constructs/texit/texit-api';
-import { TexitSnsNotifier } from '../constructs/texit/texit-sns-notifier';
 
 export interface TexitApiStackProps extends StackProps {
   /**
@@ -41,25 +40,20 @@ export interface TexitApiStackProps extends StackProps {
    */
   readonly configObject?: string;
   /**
-   * If the sns notifier should be made.
+   * The SNS Notifier Topic.
    */
-  readonly disableNotifier?: boolean;
+  readonly notifierTopic?: ITopic;
 }
 
 /**
  * Stack that deploys the Texit API.
  */
 export class TexitApiStack extends Stack {
-  readonly notifierTopic?: ITopic;
   readonly handler: IFunction;
   readonly api: HttpApi;
 
   constructor(scope: Construct, id: string, props: TexitApiStackProps) {
     super(scope, id, props);
-
-    if (!props.disableNotifier) {
-      this.notifierTopic = new TexitSnsNotifier(this, 'notifier');
-    }
 
     const texit = new TexitApi(this, 'api', {
       binary: props.binary,
@@ -69,7 +63,7 @@ export class TexitApiStack extends Stack {
       executionTable: props.executionTable,
       provisionNodeWorkflow: props.provisionNodeWorkflow,
       deployNodeWorkflow: props.deployNodeWorkflow,
-      snsNotifier: this.notifierTopic,
+      snsNotifier: props.notifierTopic,
     });
     this.handler = texit.handler;
     this.api = texit.api;

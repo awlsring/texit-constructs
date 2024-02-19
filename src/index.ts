@@ -10,3 +10,4 @@ export * from './constructs/texit/workflow/provision-node-workflow';
 export * from './constructs/texit/workflow/deprovision-node-workflow';
 export * from './constructs/texit/workflow/activity-invoke';
 export * from './constructs/texit/workflow/workflow';
+export * from './constructs/texit/texit-sns-notifier';

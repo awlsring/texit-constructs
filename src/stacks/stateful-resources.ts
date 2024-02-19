@@ -4,6 +4,7 @@ import { Bucket } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
 import { TexitDatabase } from '../constructs/texit/tables';
+import { TexitSnsNotifier } from '../constructs/texit/texit-sns-notifier';
 
 export interface StatefulResourcesStackProps extends StackProps {
   /**
@@ -23,6 +24,8 @@ export class TexitStatefulResourcesStack extends Stack {
   readonly nodesTable: ITable;
   readonly executionsTable: ITable;
   readonly configBucket: Bucket;
+  readonly notifierTopic: TexitSnsNotifier;
+
   constructor(
     scope: Construct,
     id: string,
@@ -33,6 +36,8 @@ export class TexitStatefulResourcesStack extends Stack {
     const database = new TexitDatabase(this, 'database');
     this.nodesTable = database.nodesTable;
     this.executionsTable = database.executionsTable;
+
+    this.notifierTopic = new TexitSnsNotifier(this, 'notifier');
 
     this.configBucket = new Bucket(this, 'config-bucket', {
       removalPolicy: RemovalPolicy.DESTROY,

@@ -2,6 +2,7 @@ import { Duration } from 'aws-cdk-lib';
 import { Architecture, Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { IBucket } from 'aws-cdk-lib/aws-s3';
+import { ITopic } from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
 
 export interface WorkflowHandlerProps {
@@ -12,6 +13,7 @@ export interface WorkflowHandlerProps {
   readonly environment?: Record<string, string>;
   readonly architecture?: Architecture;
   readonly logRetention?: RetentionDays;
+  readonly snsNotifier?: ITopic;
   readonly timeout?: Duration;
 }
 
@@ -28,6 +30,7 @@ export class WorkflowHandler extends Function {
       environment: {
         CONFIG_BUCKET: props.configBucket.bucketName,
         CONFIG_OBJECT: props.configObject ?? 'config.yaml',
+        SNS_NOTIFIER_ARN: props.snsNotifier?.topicArn ?? '',
         ...props.environment,
       },
     });
