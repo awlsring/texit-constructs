@@ -9,6 +9,7 @@ import {
   IFunction,
   Runtime,
 } from 'aws-cdk-lib/aws-lambda';
+import { SnsEventSource } from 'aws-cdk-lib/aws-lambda-event-sources';
 import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { IBucket } from 'aws-cdk-lib/aws-s3';
 import { ITopic } from 'aws-cdk-lib/aws-sns';
@@ -80,6 +81,7 @@ export class TexitDiscordBot extends Construct {
         TRACKED_EXECUTION_TABLE: this.trackedExecution.tableName,
       },
     });
+    this.callbackHandler.addEventSource(new SnsEventSource(props.callbackTopic));
 
     const integration = new HttpLambdaIntegration(
       'api-integration',
