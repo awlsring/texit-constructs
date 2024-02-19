@@ -16,7 +16,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     allowedUsernames: ['awlsring'],
     secret: 'GITHUB_TOKEN',
   },
-  repositoryUrl: 'https://github.com/mattcanemail/texit-constructs.git',
+  repositoryUrl: 'https://github.com/awlsring/texit-constructs.git',
   githubOptions: {
     projenCredentials: GithubCredentials.fromPersonalAccessToken(
       'PROJEN_GITHUB_TOKEN',
