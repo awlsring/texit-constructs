@@ -6,6 +6,7 @@ import { IBucket } from 'aws-cdk-lib/aws-s3';
 import { IStateMachine } from 'aws-cdk-lib/aws-stepfunctions';
 import { Construct } from 'constructs';
 import { TexitApi } from '../constructs/texit/texit-api';
+import { TexitSnsNotifier } from '../constructs/texit/texit-sns-notifier';
 
 export interface TexitApiStackProps extends StackProps {
   /**
@@ -38,6 +39,10 @@ export interface TexitApiStackProps extends StackProps {
    * @default config.yaml
    */
   readonly configObject?: string;
+  /**
+   * If the sns notifier should be made.
+   */
+  readonly disableNotifier?: boolean;
 }
 
 /**
@@ -50,6 +55,11 @@ export class TexitApiStack extends Stack {
   constructor(scope: Construct, id: string, props: TexitApiStackProps) {
     super(scope, id, props);
 
+    let snsNotifier: TexitSnsNotifier | undefined;
+    if (!props.disableNotifier) {
+      snsNotifier = new TexitSnsNotifier(this, 'notifier');
+    }
+
     const texit = new TexitApi(this, 'api', {
       binary: props.binary,
       configBucket: props.configBucket,
@@ -58,6 +68,7 @@ export class TexitApiStack extends Stack {
       executionTable: props.executionTable,
       provisionNodeWorkflow: props.provisionNodeWorkflow,
       deployNodeWorkflow: props.deployNodeWorkflow,
+      snsNotifier: snsNotifier,
     });
     this.handler = texit.handler;
     this.api = texit.api;

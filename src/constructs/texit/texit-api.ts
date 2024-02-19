@@ -11,6 +11,7 @@ import {
 } from 'aws-cdk-lib/aws-lambda';
 import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { IBucket } from 'aws-cdk-lib/aws-s3';
+import { ITopic } from 'aws-cdk-lib/aws-sns';
 import { IStateMachine } from 'aws-cdk-lib/aws-stepfunctions';
 import { Construct } from 'constructs';
 
@@ -31,6 +32,7 @@ export interface TexitApiProps {
   readonly deployNodeWorkflow: IStateMachine;
   readonly configObject?: string;
   readonly handler?: TexitHandlerProps;
+  readonly snsNotifier?: ITopic;
 }
 
 export class TexitApi extends Construct {
@@ -55,6 +57,7 @@ export class TexitApi extends Construct {
           props.provisionNodeWorkflow.stateMachineArn,
         DEPROVISION_NODE_WORKFLOW_ARN: props.deployNodeWorkflow.stateMachineArn,
         ...props.handler?.environment,
+        SNS_NOTIFIER_ARN: props.snsNotifier?.topicArn ?? '',
       },
     });
     props.configBucket.grantRead(this.handler);
@@ -62,6 +65,9 @@ export class TexitApi extends Construct {
     props.executionTable.grantReadWriteData(this.handler);
     props.provisionNodeWorkflow.grantStartExecution(this.handler);
     props.deployNodeWorkflow.grantStartExecution(this.handler);
+    if (props.snsNotifier) {
+      props.snsNotifier.grantPublish(this.handler);
+    }
 
     const integration = new HttpLambdaIntegration(
       'api-integration',

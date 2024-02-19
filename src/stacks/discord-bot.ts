@@ -2,6 +2,7 @@ import { CfnOutput, Stack, StackProps } from 'aws-cdk-lib';
 import { HttpApi } from 'aws-cdk-lib/aws-apigatewayv2';
 import { Code, IFunction } from 'aws-cdk-lib/aws-lambda';
 import { IBucket } from 'aws-cdk-lib/aws-s3';
+import { ITopic } from 'aws-cdk-lib/aws-sns';
 import { Construct } from 'constructs';
 import { TexitDiscordBot } from '../constructs/discord-bot/discord-bot';
 
@@ -14,6 +15,10 @@ export interface TexitDiscordBotStackProps extends StackProps {
    * The S3 bucket containing the Texit configuration file.
    */
   readonly configBucket: IBucket;
+  /**
+   * The Texit SNS Topic that notifies execution completion.
+   */
+  readonly callbackTopic: ITopic;
   /**
    * The object key of the Texit configuration file.
    *
@@ -41,6 +46,7 @@ export class TexitDiscordBotStack extends Stack {
       configBucket: props.configBucket,
       configObject: props.configObject,
       texitEndpoint: props.texitEndpoint,
+      callbackTopic: props.callbackTopic,
     });
     this.handler = texit.handler;
     this.api = texit.api;
