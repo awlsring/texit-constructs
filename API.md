@@ -6849,7 +6849,8 @@ const texitDiscordBotProps: TexitDiscordBotProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#texit-constructs.TexitDiscordBotProps.property.binary">binary</a></code> | <code>aws-cdk-lib.aws_lambda.Code</code> | *No description.* |
+| <code><a href="#texit-constructs.TexitDiscordBotProps.property.botBinary">botBinary</a></code> | <code>aws-cdk-lib.aws_lambda.Code</code> | *No description.* |
+| <code><a href="#texit-constructs.TexitDiscordBotProps.property.callbackBinary">callbackBinary</a></code> | <code>aws-cdk-lib.aws_lambda.Code</code> | *No description.* |
 | <code><a href="#texit-constructs.TexitDiscordBotProps.property.callbackTopic">callbackTopic</a></code> | <code>aws-cdk-lib.aws_sns.ITopic</code> | *No description.* |
 | <code><a href="#texit-constructs.TexitDiscordBotProps.property.configBucket">configBucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | *No description.* |
 | <code><a href="#texit-constructs.TexitDiscordBotProps.property.configObject">configObject</a></code> | <code>string</code> | *No description.* |
@@ -6858,10 +6859,20 @@ const texitDiscordBotProps: TexitDiscordBotProps = { ... }
 
 ---
 
-##### `binary`<sup>Required</sup> <a name="binary" id="texit-constructs.TexitDiscordBotProps.property.binary"></a>
+##### `botBinary`<sup>Required</sup> <a name="botBinary" id="texit-constructs.TexitDiscordBotProps.property.botBinary"></a>
 
 ```typescript
-public readonly binary: Code;
+public readonly botBinary: Code;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.Code
+
+---
+
+##### `callbackBinary`<sup>Required</sup> <a name="callbackBinary" id="texit-constructs.TexitDiscordBotProps.property.callbackBinary"></a>
+
+```typescript
+public readonly callbackBinary: Code;
 ```
 
 - *Type:* aws-cdk-lib.aws_lambda.Code
@@ -6942,7 +6953,8 @@ const texitDiscordBotStackProps: TexitDiscordBotStackProps = { ... }
 | <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.synthesizer">synthesizer</a></code> | <code>aws-cdk-lib.IStackSynthesizer</code> | Synthesis method to use while deploying this stack. |
 | <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.tags">tags</a></code> | <code>{[ key: string ]: string}</code> | Stack tags that will be applied to all the taggable resources and the stack itself. |
 | <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.terminationProtection">terminationProtection</a></code> | <code>boolean</code> | Whether to enable termination protection for this stack. |
-| <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.binary">binary</a></code> | <code>aws-cdk-lib.aws_lambda.Code</code> | The code asset to deploy. |
+| <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.botBinary">botBinary</a></code> | <code>aws-cdk-lib.aws_lambda.Code</code> | The code asset to deploy for the bot. |
+| <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.callbackBinary">callbackBinary</a></code> | <code>aws-cdk-lib.aws_lambda.Code</code> | The code asset to deploy for the callback handler. |
 | <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.callbackTopic">callbackTopic</a></code> | <code>aws-cdk-lib.aws_sns.ITopic</code> | The Texit SNS Topic that notifies execution completion. |
 | <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.configBucket">configBucket</a></code> | <code>aws-cdk-lib.aws_s3.IBucket</code> | The S3 bucket containing the Texit configuration file. |
 | <code><a href="#texit-constructs.TexitDiscordBotStackProps.property.configObject">configObject</a></code> | <code>string</code> | The object key of the Texit configuration file. |
@@ -7160,15 +7172,27 @@ Whether to enable termination protection for this stack.
 
 ---
 
-##### `binary`<sup>Required</sup> <a name="binary" id="texit-constructs.TexitDiscordBotStackProps.property.binary"></a>
+##### `botBinary`<sup>Required</sup> <a name="botBinary" id="texit-constructs.TexitDiscordBotStackProps.property.botBinary"></a>
 
 ```typescript
-public readonly binary: Code;
+public readonly botBinary: Code;
 ```
 
 - *Type:* aws-cdk-lib.aws_lambda.Code
 
-The code asset to deploy.
+The code asset to deploy for the bot.
+
+---
+
+##### `callbackBinary`<sup>Required</sup> <a name="callbackBinary" id="texit-constructs.TexitDiscordBotStackProps.property.callbackBinary"></a>
+
+```typescript
+public readonly callbackBinary: Code;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.Code
+
+The code asset to deploy for the callback handler.
 
 ---
 

@@ -23,7 +23,8 @@ export interface DiscordHandlerProps {
 }
 
 export interface TexitDiscordBotProps {
-  readonly binary: Code;
+  readonly botBinary: Code;
+  readonly callbackBinary: Code;
   readonly handler?: DiscordHandlerProps;
   readonly callbackTopic: ITopic;
   readonly configBucket: IBucket;
@@ -50,7 +51,7 @@ export class TexitDiscordBot extends Construct {
     this.handler = new Function(this, 'api-handler', {
       functionName: props.handler?.functionName ?? 'TexitDiscordBotHandler',
       handler: 'main',
-      code: props.binary,
+      code: props.botBinary,
       runtime: Runtime.PROVIDED_AL2023,
       architecture: props.handler?.architecture ?? Architecture.ARM_64,
       logRetention: props.handler?.logRetention ?? RetentionDays.ONE_WEEK,
@@ -67,7 +68,7 @@ export class TexitDiscordBot extends Construct {
     this.callbackHandler = new Function(this, 'callback-handler', {
       functionName: 'TexitDiscordCallbackHandler',
       handler: 'main',
-      code: props.binary,
+      code: props.callbackBinary,
       runtime: Runtime.PROVIDED_AL2023,
       architecture: Architecture.ARM_64,
       logRetention: RetentionDays.ONE_WEEK,

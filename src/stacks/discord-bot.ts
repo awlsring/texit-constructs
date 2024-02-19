@@ -8,9 +8,13 @@ import { TexitDiscordBot } from '../constructs/discord-bot/discord-bot';
 
 export interface TexitDiscordBotStackProps extends StackProps {
   /**
-   * The code asset to deploy
+   * The code asset to deploy for the bot
    */
-  readonly binary: Code;
+  readonly botBinary: Code;
+  /**
+   * The code asset to deploy for the callback handler
+   */
+  readonly callbackBinary: Code;
   /**
    * The S3 bucket containing the Texit configuration file.
    */
@@ -42,7 +46,8 @@ export class TexitDiscordBotStack extends Stack {
     super(scope, id, props);
 
     const texit = new TexitDiscordBot(this, 'api', {
-      binary: props.binary,
+      botBinary: props.botBinary,
+      callbackBinary: props.callbackBinary,
       configBucket: props.configBucket,
       configObject: props.configObject,
       texitEndpoint: props.texitEndpoint,
