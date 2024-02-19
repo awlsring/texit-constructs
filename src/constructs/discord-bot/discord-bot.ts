@@ -65,6 +65,7 @@ export class TexitDiscordBot extends Construct {
       },
     });
     props.configBucket.grantRead(this.handler);
+    this.trackedExecution.grantReadWriteData(this.handler);
 
     this.callbackHandler = new Function(this, 'callback-handler', {
       functionName: 'TexitDiscordCallbackHandler',
@@ -81,6 +82,7 @@ export class TexitDiscordBot extends Construct {
         TRACKED_EXECUTION_TABLE: this.trackedExecution.tableName,
       },
     });
+    this.trackedExecution.grantReadWriteData(this.callbackHandler);
     this.callbackHandler.addEventSource(new SnsEventSource(props.callbackTopic));
 
     const integration = new HttpLambdaIntegration(
