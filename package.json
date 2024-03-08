@@ -50,7 +50,7 @@
     "jsii-docgen": "^10.3.21",
     "jsii-pacmak": "^1.95.0",
     "jsii-rosetta": "1.x",
-    "projen": "^0.80.8",
+    "projen": "^0.80.9",
     "standard-version": "^9",
     "ts-jest": "^27",
     "typescript": "^5.4.2"
