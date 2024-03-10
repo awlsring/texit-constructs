@@ -63,6 +63,7 @@ export class ProvisionNodeWorkflow extends TexitWorkflow {
         ),
         tailnetControlServer: JsonPath.stringAt('$.tailnetControlServer'),
         preauthKey: JsonPath.stringAt('$.preauthKey'),
+        size: JsonPath.stringAt('$.size'),
       }),
       resultPath: '$.platformId',
     });
@@ -117,6 +118,7 @@ export class ProvisionNodeWorkflow extends TexitWorkflow {
         tailnetDeviceName: JsonPath.stringAt(
           '$.formedIdentifiers.tailnetDeviceName',
         ),
+        size: JsonPath.stringAt('$.size'),
         ephemeral: JsonPath.stringAt('$.ephemeral'),
       }),
     });
