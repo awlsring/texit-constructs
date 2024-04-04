@@ -51,6 +51,22 @@ export class ProvisionNodeWorkflow extends TexitWorkflow {
       resultPath: '$.preauthKey',
     });
 
+    const createNodeRecord = new ActivityInvoke(this, 'CreateNodeRecord', {
+      handler: this.handler,
+      activityName: 'createNodeRecord',
+      input: TaskInput.fromObject({
+        nodeId: JsonPath.stringAt('$.formedIdentifiers.nodeId'),
+        providerName: JsonPath.stringAt('$.providerName'),
+        location: JsonPath.stringAt('$.location'),
+        tailnetName: JsonPath.stringAt('$.tailnetName'),
+        tailnetDeviceName: JsonPath.stringAt(
+          '$.formedIdentifiers.tailnetDeviceName',
+        ),
+        size: JsonPath.stringAt('$.size'),
+        ephemeral: JsonPath.stringAt('$.ephemeral'),
+      }),
+    });
+
     const createNode = new ActivityInvoke(this, 'CreateNode', {
       handler: this.handler,
       activityName: 'createNode',
@@ -104,9 +120,9 @@ export class ProvisionNodeWorkflow extends TexitWorkflow {
         tailnetDeviceId: JsonPath.stringAt('$.tailnetDeviceId'),
       }),
     });
-    const createNodeRecord = new ActivityInvoke(this, 'CreateNodeRecord', {
+    const updateNodeRecord = new ActivityInvoke(this, 'CreateNodeRecord', {
       handler: this.handler,
-      activityName: 'createNodeRecord',
+      activityName: 'updateNodeRecord',
       input: TaskInput.fromObject({
         nodeId: JsonPath.stringAt('$.formedIdentifiers.nodeId'),
         platformId: JsonPath.stringAt('$.platformId'),
@@ -157,13 +173,14 @@ export class ProvisionNodeWorkflow extends TexitWorkflow {
     );
 
     const chain = formIdentifiers
+      .next(createNodeRecord)
       .next(createPreauthKey)
       .next(createNode)
       .next(setRetryCounters)
       .next(getTailnetWait)
       .next(getTailnetDeviceId)
       .next(enableExitNode)
-      .next(createNodeRecord);
+      .next(updateNodeRecord);
 
     getTailnetDeviceId.addCatch(getDeviceChoice, {
       errors: ['DeviceNotFoundError'],
